@@ -3,10 +3,15 @@
   become: true
   become_method: sudo
   tasks:
+    - copy: src=files/{{item}} dest=/tmp/{{item}}
+      with_items:
+        - filemove.sh
+        - filemove1.sh
+
     - debug: msg="am going to move a file"
 
     - name: moving file
-      command: /bin/sh files/filemove.sh
+      command: /bin/sh /tmp/filemove.sh
       register: file_status
 
     - debug: msg="file move status {{file_status.stdout}}"
