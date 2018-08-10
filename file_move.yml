@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+    - debug: msg="am going to move a file"
+
+    - name: moving file
+      command: /bin/sh files/filemove.sh
+      register: file_status
+
+    - debug: msg="file move status {{file_status.stdout}}"
+    - name: moving correct file location
+      command: /bin/sh files/filemove1.sh
+      register: file1_status
+      when: file_status.stdout == 1
+
+    - debug: msg="file1 move status {{file1_status.stdout}}"
+
