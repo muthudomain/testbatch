@@ -16,7 +16,7 @@
     - debug: msg="file move status {{file_status.stdout}}"
 
     - name: moving error file location
-      command: /bin/sh files/filemove.sh
+      command: /bin/sh /tmp/filemove.sh
       register: file1_status
       when: file_status.stdout == 0
 
