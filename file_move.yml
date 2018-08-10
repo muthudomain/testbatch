@@ -10,10 +10,16 @@
       register: file_status
 
     - debug: msg="file move status {{file_status.stdout}}"
+
     - name: moving correct file location
       command: /bin/sh files/filemove1.sh
       register: file1_status
       when: file_status.stdout == 1
 
     - debug: msg="file1 move status {{file1_status.stdout}}"
+
+    - set_stats:
+        data:
+          first_file_status: "{{ file_status.stdout | default('NA') }}"
+          second_file_status: "{{ file1_status.stdout | default('NA') }}"
 
