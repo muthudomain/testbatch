@@ -4,4 +4,4 @@
   become_method: sudo
   tasks:
      - name: moving error file location
-      command: /bin/sh /tmp/filemove.sh
+       command: /bin/sh /tmp/filemove.sh
